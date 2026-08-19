@@ -74,6 +74,14 @@
 
   /* ---------- layout ---------- */
   main{max-width:1480px;margin:0 auto;padding:12px 16px 28px}
+  html,body{max-width:100%;overflow-x:hidden;width:100%}
+  main,header.bar,footer.site{width:100%;max-width:100%;box-sizing:border-box}
+  .row-charts>*,.kpi,.panel,.panel>*,.readout>*,.panel-f>*{min-width:0}
+  .panel{overflow:hidden;max-width:100%;width:100%}
+  section.panel{display:block}
+  .row-charts,.kpis,main{max-width:100%}
+  .readout,.panel-f,.panel-h,.conv{overflow-wrap:anywhere;word-break:break-word}
+  .readout>span,.panel-f>span{white-space:normal}
   .panel{background:var(--panel);border:1px solid var(--border);border-radius:4px;box-shadow:0 1px 2px rgba(60,64,67,.06)}
   .panel-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px 16px;padding:8px 12px 7px;border-bottom:1px solid var(--border-soft);flex-wrap:wrap}
   .panel-h h2{font-size:12.5px;letter-spacing:.01em}
@@ -93,7 +101,7 @@
 
   /* ---------- charts ---------- */
   .row-charts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .chart{height:260px;position:relative}
+  .chart{height:260px;position:relative;width:100%;min-width:0;overflow:hidden}
   .chart .empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink-2);font-size:12px;background:#fff;z-index:3;text-align:center;padding:12px}
   .chart .empty[hidden]{display:none}
   .readout{padding:4px 12px;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:11px;border-bottom:1px solid var(--border-soft);display:flex;gap:14px;flex-wrap:wrap;color:var(--ink);min-height:23px;background:var(--panel-2)}
@@ -162,7 +170,7 @@
     .search input{width:100%}
     main{padding:10px 10px 22px}
     footer.site{padding:0 10px 28px}
-    .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;width:100%;contain:inline-size}
     thead th{position:sticky;top:auto}
     th.coin,td.coin{position:sticky;left:0;z-index:1;background:#fff}
     thead th.coin{z-index:3;background:var(--panel-2)}
@@ -173,8 +181,25 @@
   @media (max-width:520px){
     .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
     .kpi .v{font-size:16px}
+    .kpi .k,.kpi .s{white-space:normal;overflow:visible;text-overflow:clip}
+    .seg{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
     .seg button{padding:0 7px;font-size:11.5px}
-    .chart{height:230px}
+    .stamp{white-space:normal;font-size:10.5px}
+    .pick input{width:104px}
+    .rowlabel{flex-direction:column;align-items:flex-start;gap:2px}
+    .rowlabel .hint{font-size:10.5px}
+    .panel-h{padding:8px 10px 6px}
+    .panel-h .sub,.legend{white-space:normal}
+    .legend{flex-wrap:wrap;gap:6px 10px}
+    .readout{gap:6px 10px;padding:4px 10px;font-size:10.5px}
+    .readout .ax{display:none}
+    .panel-f{gap:2px 12px;padding:6px 10px;font-size:10.5px}
+    .conv{font-size:10.5px}
+    .chart{height:220px}
+    .tabs button{font-size:11px;padding:4px 9px}
+    .tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+    .chips{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+    .count{white-space:normal}
   }
   @media (prefers-reduced-motion:no-preference){
     .seg button,.chip,thead th button{transition:background-color .12s ease}
@@ -513,6 +538,24 @@ th.avg button .u{color:#80868b}
       handleScroll: { mouseWheel: false, pressedMouseMove: true, horzTouchDrag: true, vertTouchDrag: false },
       handleScale: { mouseWheel: false, pinch: true, axisPressedMouseMove: { time: true, price: false }, axisDoubleClickReset: true }
     });
+  }
+
+  function fitCharts() {
+    ['c1', 'c2'].forEach(function (id, i) {
+      var el = $(id), ch = i === 0 ? CH.c1 : CH.c2;
+      if (!el || !ch) return;
+      var w = el.clientWidth, hgt = el.clientHeight;
+      if (w > 0 && hgt > 0) { try { ch.applyOptions({ width: w, height: hgt }); ch.timeScale().fitContent(); } catch (e) { /* ignore */ } }
+    });
+  }
+  function watchCharts() {
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(function () { fitCharts(); });
+      ['c1', 'c2'].forEach(function (id) { var el = $(id); if (el) ro.observe(el); });
+    }
+    window.addEventListener('resize', fitCharts);
+    window.addEventListener('orientationchange', function () { setTimeout(fitCharts, 250); });
+    setTimeout(fitCharts, 50); setTimeout(fitCharts, 400); setTimeout(fitCharts, 1200);
   }
 
   function chartsUnavailable(msg) {
@@ -975,7 +1018,7 @@ th.avg button .u{color:#80868b}
     buildPicker();
     renderTable();
     var ok = buildCharts();
-    if (ok) applyUnit();
+    if (ok) { applyUnit(); watchCharts(); }
     renderCharts();
     setBarH();
     setInterval(renderStamp, 60000);
