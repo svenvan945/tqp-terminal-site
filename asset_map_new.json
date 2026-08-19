@@ -1,0 +1,794 @@
+{
+  "para:TOTAL2": {
+    "category": "ETFs & Indices",
+    "name": "Crypto Total Market Cap Excluding Bitcoin (TOTAL2)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. index perp quoted in USD billions; no market cap of its own"
+  },
+  "para:OTHERS": {
+    "category": "ETFs & Indices",
+    "name": "Crypto Market Cap Excluding Top 10 (OTHERS)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. altcoin market-cap index (ex top-10), quoted in USD billions"
+  },
+  "para:BTCD": {
+    "category": "ETFs & Indices",
+    "name": "Bitcoin Dominance (BTC.D, % of total crypto market cap)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. quoted in percent; cross-checked vs TOTAL2/BTC cap"
+  },
+  "para:H100": {
+    "category": "Commodities",
+    "name": "NVIDIA H100 GPU rental price (USD/hour)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. compute-price perp, not an equity; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "para:AVGO": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Broadcom Inc.",
+    "kind": "stock",
+    "yahoo": "AVGO",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. "
+  },
+  "para:COHR": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Coherent Corp.",
+    "kind": "stock",
+    "yahoo": "COHR",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. optics/photonics"
+  },
+  "para:GLW": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Corning Incorporated",
+    "kind": "stock",
+    "yahoo": "GLW",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. optical fiber/glass"
+  },
+  "para:CRDO": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Credo Technology Group Holding Ltd.",
+    "kind": "stock",
+    "yahoo": "CRDO",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. AI connectivity/SerDes"
+  },
+  "para:LRCX": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Lam Research Corporation",
+    "kind": "stock",
+    "yahoo": "LRCX",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. semicap"
+  },
+  "para:NET": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Cloudflare, Inc.",
+    "kind": "stock",
+    "yahoo": "NET",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. "
+  },
+  "para:STX": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Seagate Technology Holdings plc",
+    "kind": "stock",
+    "yahoo": "STX",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. HDD maker — NOT the Stacks (STX) crypto token on the main dex"
+  },
+  "para:IREN": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "IREN Limited",
+    "kind": "stock",
+    "yahoo": "IREN",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. AI/HPC data centres; Australian-domiciled, Nasdaq-listed"
+  },
+  "para:VST": {
+    "category": "Stocks — US Other",
+    "name": "Vistra Corp.",
+    "kind": "stock",
+    "yahoo": "VST",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. independent power producer"
+  },
+  "para:TER": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Teradyne, Inc.",
+    "kind": "stock",
+    "yahoo": "TER",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. semiconductor test"
+  },
+  "para:AAOI": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Applied Optoelectronics, Inc.",
+    "kind": "stock",
+    "yahoo": "AAOI",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. optical transceivers"
+  },
+  "para:10Y": {
+    "category": "ETFs & Indices",
+    "name": "US 10-Year Treasury Yield (%)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. yield perp; ^TNX carries no market cap so yahoo left null"
+  },
+  "para:CIEN": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Ciena Corporation",
+    "kind": "stock",
+    "yahoo": "CIEN",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. optical networking"
+  },
+  "para:NAVER": {
+    "category": "Stocks — Korea",
+    "name": "NAVER Corporation",
+    "kind": "stock",
+    "yahoo": "035420.KS",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. Korean internet/AI; perp quoted in USD, Yahoo line is KRX in KRW; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "para:RDDT": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Reddit, Inc.",
+    "kind": "stock",
+    "yahoo": "RDDT",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. "
+  },
+  "para:UNITREE": {
+    "category": "Stocks — China/Taiwan/Other Asia",
+    "name": "Unitree Robotics Co., Ltd.",
+    "kind": "stock",
+    "yahoo": "688836.SS",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. Shanghai STAR Market humanoid-robot maker; 688836.SS now returns data (it 404'd at the Aug 2026 IPO)"
+  },
+  "para:CRWD": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "CrowdStrike Holdings, Inc.",
+    "kind": "stock",
+    "yahoo": "CRWD",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. "
+  },
+  "para:TENCENT": {
+    "category": "Stocks — China/Taiwan/Other Asia",
+    "name": "Tencent Holdings Limited",
+    "kind": "stock",
+    "yahoo": "0700.HK",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. perp quoted in USD (ADR-equivalent, TCEHY ~57.7); Yahoo line is the HKEX primary listing; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "para:CAMBRICON": {
+    "category": "Stocks — China/Taiwan/Other Asia",
+    "name": "Cambricon Technologies Corporation Limited",
+    "kind": "stock",
+    "yahoo": "688256.SS",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. Chinese AI-chip designer, Shanghai STAR Market; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "para:MELI": {
+    "category": "Stocks — US Other",
+    "name": "MercadoLibre, Inc.",
+    "kind": "stock",
+    "yahoo": "MELI",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. LatAm e-commerce, Nasdaq-listed; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "para:SMCI": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Super Micro Computer, Inc.",
+    "kind": "stock",
+    "yahoo": "SMCI",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. "
+  },
+  "para:ANSEM": {
+    "category": "Crypto — Memes",
+    "name": "ANSEM (The Black Bull)",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "the-black-bull",
+    "note": "Paragon (para) HIP-3 dex. Solana memecoin tied to KOL Ansem (CG rank ~256); price matched CG $0.230 vs perp $0.236. Bridged wrapper 'unit-ansem' also exists on Hyperliquid; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "para:INNOLIGHT": {
+    "category": "Stocks — China/Taiwan/Other Asia",
+    "name": "Zhongji Innolight Co., Ltd.",
+    "kind": "stock",
+    "yahoo": "300308.SZ",
+    "coingecko": null,
+    "note": "Paragon (para) HIP-3 dex. Chinese optical-transceiver leader, Shenzhen ChiNext; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "hyna:BTC": {
+    "category": "Crypto — Majors",
+    "name": "Bitcoin",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "bitcoin",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:ETH": {
+    "category": "Crypto — Majors",
+    "name": "Ethereum",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "ethereum",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:HYPE": {
+    "category": "Crypto — Majors",
+    "name": "Hyperliquid",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "hyperliquid",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. main-dex note: CG rank ~9; L1 + perp DEX native token"
+  },
+  "hyna:SOL": {
+    "category": "Crypto — Majors",
+    "name": "Solana",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "solana",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:ZEC": {
+    "category": "Crypto — Majors",
+    "name": "Zcash",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "zcash",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. main-dex note: CG rank ~14; privacy coin"
+  },
+  "hyna:XRP": {
+    "category": "Crypto — Majors",
+    "name": "XRP",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "ripple",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:BNB": {
+    "category": "Crypto — Majors",
+    "name": "BNB",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "binancecoin",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:DOGE": {
+    "category": "Crypto — Majors",
+    "name": "Dogecoin",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "dogecoin",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:SUI": {
+    "category": "Crypto — Majors",
+    "name": "Sui",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "sui",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. main-dex note: rank ~34 by cap; borderline major"
+  },
+  "hyna:PUMP": {
+    "category": "Crypto — Other",
+    "name": "Pump.fun",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "pump-fun",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. main-dex note: meme launchpad platform token"
+  },
+  "hyna:FARTCOIN": {
+    "category": "Crypto — Memes",
+    "name": "Fartcoin",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "fartcoin",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:ENA": {
+    "category": "Crypto — DeFi",
+    "name": "Ethena",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "ethena",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:XMR": {
+    "category": "Crypto — Majors",
+    "name": "Monero",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "monero",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. main-dex note: CG rank ~15; privacy coin; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "hyna:LTC": {
+    "category": "Crypto — Majors",
+    "name": "Litecoin",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "litecoin",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:LINK": {
+    "category": "Crypto — Majors",
+    "name": "Chainlink",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "chainlink",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:XPL": {
+    "category": "Crypto — L1/L2",
+    "name": "Plasma",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "plasma",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. main-dex note: stablecoin L1"
+  },
+  "hyna:BCH": {
+    "category": "Crypto — Majors",
+    "name": "Bitcoin Cash",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "bitcoin-cash",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "hyna:ADA": {
+    "category": "Crypto — Majors",
+    "name": "Cardano",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "cardano",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. mark price tracks the main-dex market"
+  },
+  "hyna:1000PEPE": {
+    "category": "Crypto — Memes",
+    "name": "Pepe (1000x lot)",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "pepe",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. 1000PEPE = 1000 PEPE per contract unit (same as main-dex kPEPE)"
+  },
+  "hyna:LIGHTER": {
+    "category": "Crypto — DeFi",
+    "name": "Lighter",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "lighter",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. perp DEX token (CG symbol LIT, id 'lighter'); traded to 2026-07-15, now flagged delisted; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "hyna:LIT": {
+    "category": "Crypto — DeFi",
+    "name": "Lighter",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "lighter",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. UNCERTAIN: duplicate LIT/LIGHTER listing that never traded (no candles, delisted, stale mark 3.37 vs Lighter 2.59); assumed to be Lighter like the main-dex LIT market; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "hyna:IP": {
+    "category": "Crypto — L1/L2",
+    "name": "Data Network (ex-Story Protocol, IP→DATA)",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "story-2",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. Story rebranded to Data Network Jun 2026 with a 1:1 IP→DATA migration; CG id 'story-2' (symbol DATA). Market delisted on both hyna and the main dex; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "hyna:BASED": {
+    "category": "Crypto — DeFi",
+    "name": "Based",
+    "kind": "crypto",
+    "yahoo": null,
+    "coingecko": "based-one",
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. Based = financial superapp built on Hyperliquid (CG id 'based-one', rank ~831); price matched CG $0.0805 vs perp $0.0803. Not Based Brett / BasedAI"
+  },
+  "hyna:GOLD": {
+    "category": "Commodities",
+    "name": "Gold (1 troy oz)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. spot gold perp; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "hyna:SILVER": {
+    "category": "Commodities",
+    "name": "Silver (1 troy oz)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "HyENA (hyna) HIP-3 dex listing of the same asset as the main-dex market. spot silver perp; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:US500": {
+    "category": "ETFs & Indices",
+    "name": "S&P 500 Index (US500)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. quoted ~1/10 of index level (SPY-like); S&P DJI-licensed. No market cap so yahoo null (^GSPC would be junk)"
+  },
+  "mkts:USTECH": {
+    "category": "ETFs & Indices",
+    "name": "Nasdaq 100 Index (US Tech 100)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. quoted ETF-equivalent (QQQ-like). No market cap so yahoo null (^NDX would be junk)"
+  },
+  "mkts:BABA": {
+    "category": "Stocks — China/Taiwan/Other Asia",
+    "name": "Alibaba Group Holding Ltd. (ADR)",
+    "kind": "stock",
+    "yahoo": "BABA",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:EUR": {
+    "category": "FX",
+    "name": "EUR/USD",
+    "kind": "fx",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:USBOND": {
+    "category": "ETFs & Indices",
+    "name": "US Treasury bond price index (long-bond, TLT-like)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. price basis inferred from quote ~86; not an equity; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:SMALL2000": {
+    "category": "ETFs & Indices",
+    "name": "Russell 2000 Index (US small caps)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. quoted ETF-equivalent (IWM-like); market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:USENERGY": {
+    "category": "ETFs & Indices",
+    "name": "US energy sector index",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. energy sector basket (XLE/VDE-like); exact basket not documented; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:USOIL": {
+    "category": "Commodities",
+    "name": "WTI Crude Oil",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. quote 114.1 is stale/placeholder (0 open interest) vs ~85 spot; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:TSLA": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Tesla, Inc.",
+    "kind": "stock",
+    "yahoo": "TSLA",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:SILVER": {
+    "category": "Commodities",
+    "name": "Silver (1 troy oz)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:GOLD": {
+    "category": "Commodities",
+    "name": "Gold (1 troy oz)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:AAPL": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Apple Inc.",
+    "kind": "stock",
+    "yahoo": "AAPL",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:GOOGL": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Alphabet Inc. Class A",
+    "kind": "stock",
+    "yahoo": "GOOGL",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:SEMI": {
+    "category": "ETFs & Indices",
+    "name": "US semiconductor sector index",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. semis basket (SOX/SMH-like, quote ~543 vs SMH ~566); market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:GLDMINE": {
+    "category": "ETFs & Indices",
+    "name": "Gold miners index",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. gold-miner basket (GDX-like, quote ~74); market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:NVDA": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "NVIDIA Corporation",
+    "kind": "stock",
+    "yahoo": "NVDA",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:TENCENT": {
+    "category": "Stocks — China/Taiwan/Other Asia",
+    "name": "Tencent Holdings Limited",
+    "kind": "stock",
+    "yahoo": "0700.HK",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. quoted in HKD (~465 vs HKEX 447); market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:JPN225": {
+    "category": "ETFs & Indices",
+    "name": "Nikkei 225 Index",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. quanto-style index perp; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:MU": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Micron Technology, Inc.",
+    "kind": "stock",
+    "yahoo": "MU",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:PLTR": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Palantir Technologies Inc.",
+    "kind": "stock",
+    "yahoo": "PLTR",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:XIAOMI": {
+    "category": "Stocks — China/Taiwan/Other Asia",
+    "name": "Xiaomi Corporation",
+    "kind": "stock",
+    "yahoo": "1810.HK",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. quoted in HKD; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:BMNR": {
+    "category": "Stocks — US Other",
+    "name": "Bitmine Immersion Technologies, Inc.",
+    "kind": "stock",
+    "yahoo": "BMNR",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. ETH digital-asset-treasury company; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "mkts:RTX": {
+    "category": "Stocks — US Other",
+    "name": "RTX Corporation",
+    "kind": "stock",
+    "yahoo": "RTX",
+    "coingecko": null,
+    "note": "Markets by Kinetiq (mkts) HIP-3 dex. aerospace/defense; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "io:OAI": {
+    "category": "Stocks — Private/Pre-IPO",
+    "name": "OpenAI (pre-IPO)",
+    "kind": "stock",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "EntropyIO (io) HIP-3 dex. OpenAI is still private as of Aug 2026 — confidential S-1 filed 2026-06-08, listing may slip to 2027; no ticker assigned, so yahoo null. Perp mark ~1250 is a pre-IPO implied share price; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "io:ANTH": {
+    "category": "Stocks — Private/Pre-IPO",
+    "name": "Anthropic PBC (pre-IPO)",
+    "kind": "stock",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "EntropyIO (io) HIP-3 dex. Anthropic is still private as of Aug 2026 — confidential draft S-1 filed 2026-06-01, Nasdaq listing targeted (Oct 2026 date floated, unconfirmed); $965B post-money May 2026 Series H. yahoo null"
+  },
+  "io:SNDK": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Sandisk Corporation",
+    "kind": "stock",
+    "yahoo": "SNDK",
+    "coingecko": null,
+    "note": "EntropyIO (io) HIP-3 dex. same underlying as xyz:SNDK"
+  },
+  "xyz:URANIUM": {
+    "category": "Commodities",
+    "name": "Uranium (U3O8, USD/lb)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:ALUMINIUM": {
+    "category": "Commodities",
+    "name": "Aluminium (LME, USD/tonne)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:DXY": {
+    "category": "FX",
+    "name": "US Dollar Index (DXY)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. USD vs major-currency basket; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:VIX": {
+    "category": "ETFs & Indices",
+    "name": "CBOE Volatility Index (VIX)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. no market cap; ^VIX deliberately not used; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:CORN": {
+    "category": "Commodities",
+    "name": "Corn (USD/bushel)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:WHEAT": {
+    "category": "Commodities",
+    "name": "Wheat (USD/bushel)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:TTF": {
+    "category": "Commodities",
+    "name": "Dutch TTF Natural Gas (EUR/MWh)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. European gas benchmark; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:VOL": {
+    "category": "ETFs & Indices",
+    "name": "Volatility index (VIX-style equity volatility reference)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. UNCERTAIN: trade.xyz docs only call it the 'VOL price feed'; distinct from xyz:VIX, never traded; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:KRW": {
+    "category": "FX",
+    "name": "USD/KRW",
+    "kind": "fx",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. quoted ~1389 won per USD; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:H100": {
+    "category": "Commodities",
+    "name": "NVIDIA H100 GPU rental price (USD/hour)",
+    "kind": "commodity",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. compute-price perp (same underlying as para:H100), not an equity; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:NIFTY": {
+    "category": "ETFs & Indices",
+    "name": "Nifty 50 Index (India)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:IBOV": {
+    "category": "ETFs & Indices",
+    "name": "Ibovespa Index (Brazil)",
+    "kind": "index",
+    "yahoo": null,
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:IBIDEN": {
+    "category": "Stocks — Japan",
+    "name": "Ibiden Co., Ltd.",
+    "kind": "stock",
+    "yahoo": "4062.T",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. ABF substrate maker; perp quoted in USD; market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:KSTR": {
+    "category": "ETFs & Indices",
+    "name": "KraneShares China Technology & Semiconductor STAR 50 Index ETF",
+    "kind": "etf",
+    "yahoo": "KSTR",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. market is currently flagged isDelisted (registered but not live / 0 OI) as of 2026-08-20"
+  },
+  "xyz:MAGS": {
+    "category": "ETFs & Indices",
+    "name": "Roundhill Magnificent Seven ETF",
+    "kind": "etf",
+    "yahoo": "MAGS",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. "
+  },
+  "xyz:IREN": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "IREN Limited",
+    "kind": "stock",
+    "yahoo": "IREN",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. AI/HPC data centres; Australian-domiciled, Nasdaq-listed"
+  },
+  "xyz:NET": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Cloudflare, Inc.",
+    "kind": "stock",
+    "yahoo": "NET",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. "
+  },
+  "xyz:CRWD": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "CrowdStrike Holdings, Inc.",
+    "kind": "stock",
+    "yahoo": "CRWD",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. "
+  },
+  "xyz:RDDT": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Reddit, Inc.",
+    "kind": "stock",
+    "yahoo": "RDDT",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. "
+  },
+  "xyz:AAOI": {
+    "category": "Stocks — US Tech/Semis",
+    "name": "Applied Optoelectronics, Inc.",
+    "kind": "stock",
+    "yahoo": "AAOI",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. "
+  },
+  "xyz:MRNA": {
+    "category": "Stocks — US Other",
+    "name": "Moderna, Inc.",
+    "kind": "stock",
+    "yahoo": "MRNA",
+    "coingecko": null,
+    "note": "trade[XYZ] (xyz) HIP-3 dex. biotech"
+  }
+}
