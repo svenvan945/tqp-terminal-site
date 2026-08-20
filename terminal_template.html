@@ -277,7 +277,7 @@ th.avg button .u{color:#80868b}
 
   <div class="rowlabel">
     <h2>Funding history · <span class="coin-name">BTC</span> · <span id="tf-name">all data</span></h2>
-    <span class="hint">Times in UTC · hover or touch for values · pinch / axis-drag to zoom</span>
+    <span class="hint">Times in UTC · drag to pan · wheel or pinch to zoom · double-click to reset <button type="button" id="reset-zoom" class="chip" style="margin-left:6px">reset zoom</button></span>
   </div>
 
   <div class="row-charts">
@@ -528,7 +528,7 @@ th.avg button .u{color:#80868b}
       layout: { background: { type: 'solid', color: '#ffffff' }, textColor: TEXT2, fontSize: 11, fontFamily: MONO },
       grid: { vertLines: { color: GRID }, horzLines: { color: GRID } },
       rightPriceScale: { borderColor: AXIS, scaleMargins: { top: 0.12, bottom: 0.12 } },
-      timeScale: { borderColor: AXIS, timeVisible: true, secondsVisible: false, fixLeftEdge: true, fixRightEdge: true, minBarSpacing: 0.4 },
+      timeScale: { borderColor: AXIS, timeVisible: true, secondsVisible: false, fixLeftEdge: false, fixRightEdge: false, minBarSpacing: 0.05, rightOffset: 2, lockVisibleTimeRangeOnResize: true },
       crosshair: {
         mode: 0,
         vertLine: { color: '#80868b', width: 1, style: 3, labelBackgroundColor: '#3c4043' },
@@ -536,27 +536,39 @@ th.avg button .u{color:#80868b}
       },
       localization: { locale: 'en-US', priceFormatter: formatter },
       handleScroll: { mouseWheel: false, pressedMouseMove: true, horzTouchDrag: true, vertTouchDrag: false },
-      handleScale: { mouseWheel: false, pinch: true, axisPressedMouseMove: { time: true, price: false }, axisDoubleClickReset: true }
+      handleScale: { mouseWheel: true, pinch: true, axisPressedMouseMove: { time: true, price: true }, axisDoubleClickReset: true }
     });
   }
 
-  function fitCharts() {
-    ['c1', 'c2'].forEach(function (id, i) {
-      var el = $(id), ch = i === 0 ? CH.c1 : CH.c2;
-      if (!el || !ch) return;
-      var w = el.clientWidth, hgt = el.clientHeight;
-      if (w > 0 && hgt > 0) { try { ch.applyOptions({ width: w, height: hgt }); ch.timeScale().fitContent(); } catch (e) { /* ignore */ } }
+  var userZoom = false;                 // set by any pan/zoom interaction
+  function resetZoom() {
+    userZoom = false;
+    [CH.c1, CH.c2].forEach(function (c) { if (c) { try { c.timeScale().fitContent(); } catch (e) { /* ignore */ } } });
+  }
+  function wireZoom() {
+    ['c1', 'c2'].forEach(function (id) {
+      var el = $(id); if (!el) return;
+      ['mousedown', 'wheel', 'touchstart'].forEach(function (ev) {
+        el.addEventListener(ev, function () { userZoom = true; }, { passive: true });
+      });
+      el.addEventListener('dblclick', function () { resetZoom(); });
+    });
+    var rb = $('reset-zoom'); if (rb) rb.addEventListener('click', resetZoom);
+  }
+  function fitCharts() {                 // autoSize handles width/height;
+    if (userZoom) return;                 // only restore the full view here
+    [CH.c1, CH.c2].forEach(function (c) {
+      if (!c) return;
+      try { c.timeScale().fitContent(); } catch (e) { /* ignore */ }
     });
   }
   function watchCharts() {
-    if (window.ResizeObserver) {
-      var ro = new ResizeObserver(function () { fitCharts(); });
-      ['c1', 'c2'].forEach(function (id) { var el = $(id); if (el) ro.observe(el); });
-    }
-    window.addEventListener('resize', fitCharts);
-    window.addEventListener('orientationchange', function () { setTimeout(fitCharts, 250); });
-    setTimeout(fitCharts, 50); setTimeout(fitCharts, 400); setTimeout(fitCharts, 1200);
-  }
+    var t = null;
+    function later() { clearTimeout(t); t = setTimeout(fitCharts, 250); }
+    window.addEventListener('orientationchange', later);
+    window.addEventListener('resize', later);   // debounced; no ResizeObserver
+  }                                             // (observer + applyOptions fought
+                                                //  each other and killed zoom)
 
   function chartsUnavailable(msg) {
     ['c1-empty', 'c2-empty'].forEach(function (id) { var e = $(id); if (e) { e.textContent = msg; e.hidden = false; } });
@@ -676,8 +688,15 @@ th.avg button .u{color:#80868b}
       e2.textContent = emsg; e2.hidden = !empty;
       CH.s1.setData(histData);
       CH.s2.setData(cumData);
-      CH.c1.timeScale().fitContent();
-      CH.c2.timeScale().fitContent();
+      if (!userZoom) {            // fit on the next frame: lightweight-charts
+        var fit = function () {   // needs a paint after setData before it
+          if (userZoom) return;   // can measure the full range
+          try { CH.c1.timeScale().fitContent(); CH.c2.timeScale().fitContent(); } catch (e) { /* ignore */ }
+        };
+        fit();
+        if (window.requestAnimationFrame) requestAnimationFrame(fit); else setTimeout(fit, 30);
+        setTimeout(fit, 120);
+      }
     }
 
     // footers
@@ -894,6 +913,7 @@ th.avg button .u{color:#80868b}
   }
   function selectCoin(c) {
     state.coin = c;
+    userZoom = false;
     var seg = $('coin-seg'), bs = seg.querySelectorAll('button');
     for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', bs[i].getAttribute('data-coin') === c ? 'true' : 'false');
     var q = $('coin-q'); if (q) { q.value = ''; }
@@ -961,6 +981,7 @@ th.avg button .u{color:#80868b}
       var b = ev.target.closest('button[data-tf]');
       if (!b) return;
       state.tf = b.getAttribute('data-tf');
+      userZoom = false;
       pressOnly(tf, b);
       renderCharts();
     });
@@ -1028,7 +1049,7 @@ th.avg button .u{color:#80868b}
     buildPicker();
     renderTable();
     var ok = buildCharts();
-    if (ok) { applyUnit(); watchCharts(); }
+    if (ok) { applyUnit(); watchCharts(); wireZoom(); window.__CH = CH; }
     renderCharts();
     setBarH();
     setInterval(renderStamp, 60000);
