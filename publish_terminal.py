@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
 Static generator for terminal.thequantphilosopher.com — Hyperliquid funding
-terminal (design 2, light data-terminal). Regenerated HOURLY on its own
-systemd timer (Tokyo box), pushed to GitHub Pages. Isolated from the bots.
+terminal (design 2, light data-terminal). Regenerated hourly by GitHub Actions
+and deployed to GitHub Pages. Isolated from the bots.
 
 Output tree in <site_repo_dir>:
   index.html            page (template + inlined lw.js + rows/categories)
-  data/hist/<coin>.json 90-day hourly funding per coin (loaded on demand)
+  data/hist/<coin>.json 92-day hourly funding per coin (loaded on demand)
   data/caps.json        market caps cache (stocks: Yahoo, crypto: CoinGecko)
 
 Usage: publish_terminal.py <site_repo_dir> [--render-only] [--skip-caps]
