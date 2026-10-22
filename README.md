@@ -43,3 +43,15 @@ public snapshot freshness independently of this workflow and review scheduling
 if the source repository will remain unchanged for long periods.
 
 See [GitHub's scheduled-workflow documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+
+If one history fetch fails while the rest of a publication succeeds, retry
+that exact market against the successful artifact instead of rebuilding all
+markets. Supply its coin name and the successful publishing run ID:
+
+```powershell
+gh workflow run publish.yml --repo svenvan945/tqp-terminal-site --ref master -f repair_history=xyz:PLTR -f source_run_id=39719753084
+```
+
+This preserves the original market snapshot timestamp and all other histories.
+Use the latest accepted publication as the source, and verify the repaired
+history after the replacement artifact is deployed.

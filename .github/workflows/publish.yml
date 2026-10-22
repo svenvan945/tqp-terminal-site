@@ -3,7 +3,17 @@ on:
   schedule:
     - cron: '4 * * * *'        # hourly, just after the funding stamp
   workflow_dispatch:
+    inputs:
+      repair_history:
+        description: 'Optional exact market whose history should be retried'
+        required: false
+        type: string
+      source_run_id:
+        description: 'Successful publishing run to preserve during a targeted retry'
+        required: false
+        type: string
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -20,11 +30,39 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install --quiet requests
+      - name: test publisher
+        run: python -m unittest -v test_publish_terminal
+      - name: restore publication for targeted history repair
+        if: github.event_name == 'workflow_dispatch' && inputs.repair_history != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+        run: |
+          [[ "$SOURCE_RUN_ID" =~ ^[0-9]+$ ]] || { echo 'A successful source run ID is required'; exit 1; }
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID" > source-run.json
+          python - <<'PY'
+          import json, os
+          with open('source-run.json') as stream:
+              run = json.load(stream)
+          assert run['conclusion'] == 'success', 'Source publication did not succeed'
+          assert run['workflow_id'] == 338194866, 'Unexpected source workflow'
+          assert run['head_branch'] == 'master', 'Source must come from master'
+          assert run['head_repository']['full_name'] == os.environ['GITHUB_REPOSITORY'], 'Source must come from this repository'
+          PY
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name github-pages --dir previous-publication
+          mkdir -p site
+          tar -xf previous-publication/artifact.tar -C site
       - name: render site
+        env:
+          REPAIR_HISTORY: ${{ inputs.repair_history }}
         run: |
           mkdir -p site
           cp CNAME site/ 2>/dev/null || true
-          python publish_terminal.py site --render-only
+          if [[ -n "$REPAIR_HISTORY" ]]; then
+            python publish_terminal.py site --render-only --repair-history "$REPAIR_HISTORY"
+          else
+            python publish_terminal.py site --render-only
+          fi
           ls -la site && du -sh site
       - uses: actions/upload-pages-artifact@v3
         with:

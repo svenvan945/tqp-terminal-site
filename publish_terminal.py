@@ -10,14 +10,19 @@ Output tree in <site_repo_dir>:
   data/caps.json        market caps cache (stocks: Yahoo, crypto: CoinGecko)
 
 Usage: publish_terminal.py <site_repo_dir> [--render-only] [--skip-caps]
+       publish_terminal.py <site_repo_dir> --render-only --repair-history <coin>
 Needs beside this script: terminal_template.html, lw.js, asset_map.json.
 """
 import json
+import math
 import os
+import re
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime, timezone
+from pathlib import Path
 
 import requests
 
@@ -279,10 +284,119 @@ def market_caps(rows, amap, repo, skip=False):
 
 
 # ---------------------------------- main ---------------------------------- #
+def repair_history(repo, coin):
+    """Repair one existing row without refreshing the snapshot or other files."""
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9:_-]*", coin):
+        raise ValueError("unsafe history coin")
+    repo = Path(repo)
+    index = repo / "index.html"
+    html = index.read_bytes().decode("utf-8")
+    assignments = list(re.finditer(r"window\.__TERMINAL_DATA__\s*=\s*", html))
+    if len(assignments) != 1:
+        raise ValueError("expected exactly one embedded terminal snapshot")
+    start = assignments[0].end()
+
+    def reject_constant(value):
+        raise ValueError(f"nonfinite snapshot value: {value}")
+
+    data, length = json.JSONDecoder(parse_constant=reject_constant).raw_decode(
+        html[start:])
+    end = start + length
+    if not re.match(r"\s*;\s*</script>", html[end:]):
+        raise ValueError("malformed embedded snapshot assignment")
+    if (not isinstance(data, dict) or type(data.get("ts")) is not int
+            or data["ts"] <= 0 or not isinstance(data.get("rows"), list)
+            or not data["rows"]):
+        raise ValueError("malformed terminal snapshot")
+    coins = []
+    for row in data["rows"]:
+        if (not isinstance(row, dict) or not isinstance(row.get("coin"), str)
+                or not row["coin"]):
+            raise ValueError("malformed snapshot row")
+        coins.append(row["coin"])
+    if len(set(coins)) != len(coins) or coin not in coins:
+        raise ValueError("repair requires one exact existing snapshot coin")
+    row = data["rows"][coins.index(coin)]
+    h = history(coin)
+    if not isinstance(h, (list, tuple)) or len(h) < 24:
+        raise ValueError("repair history requires at least 24 points")
+    previous = 0
+    for point in h:
+        if not isinstance(point, (list, tuple)) or len(point) != 2:
+            raise ValueError("malformed history point")
+        timestamp, rate = point
+        if (type(timestamp) is not int or timestamp <= previous
+                or type(rate) not in (int, float) or not math.isfinite(rate)):
+            raise ValueError("history must be finite and strictly time ordered")
+        previous = timestamp
+    if h[-1][0] < data["ts"] // 3600 * 3600:
+        raise ValueError("history does not reach the snapshot hour")
+    row.update(averages(h, data["ts"]))
+    row["hist"] = 1
+    history_bytes = json.dumps(
+        [[t, round(rate, 10)] for t, rate in h],
+        separators=(",", ":"), allow_nan=False).encode("utf-8")
+    payload = json.dumps(data, separators=(",", ":"), allow_nan=False)
+    index_bytes = (html[:start] + payload + html[end:]).encode("utf-8")
+
+    # Validate and serialize both outputs before replacing either published file.
+    hdir = repo / "data" / "hist"
+    hdir.mkdir(parents=True, exist_ok=True)
+    target = hdir / (coin.replace(":", "_") + ".json")
+    old_history = target.read_bytes() if target.exists() else None
+    staged = []
+    try:
+        for content in (history_bytes, index_bytes):
+            fd, name = tempfile.mkstemp(prefix=".history-repair-", dir=repo)
+            staged.append(Path(name))
+            with os.fdopen(fd, "wb") as stream:
+                stream.write(content)
+        os.replace(staged[0], target)
+        try:
+            os.replace(staged[1], index)
+        except OSError:
+            if old_history is None:
+                target.unlink()
+            else:
+                staged[0].write_bytes(old_history)
+                os.replace(staged[0], target)
+            raise
+    finally:
+        for path in staged:
+            path.unlink(missing_ok=True)
+    print(f"repaired {coin}: {len(h)} points; snapshot {data['ts']} preserved")
+    return 0
+
+
+def store_row_history(row, hist, hdir, now_s):
+    if len(hist) >= 24:
+        filename = row["coin"].replace(":", "_") + ".json"
+        with open(os.path.join(hdir, filename), "w", encoding="utf-8") as stream:
+            json.dump([[t, round(rate, 10)] for t, rate in hist], stream,
+                      separators=(",", ":"))
+        row.update(averages(hist, now_s))
+        row["hist"] = 1
+        return 1
+    row.update({key: None for key in ("a1d", "a3d", "a7d", "a2w", "a1m", "a3m")})
+    row["hist"] = 0
+    return 0
+
+
 def main():
     repo = sys.argv[1]
     render_only = "--render-only" in sys.argv
     skip_caps = "--skip-caps" in sys.argv
+    if "--repair-history" in sys.argv:
+        at = sys.argv.index("--repair-history")
+        if (not render_only or at + 1 >= len(sys.argv)
+                or sys.argv.count("--repair-history") != 1):
+            print("repair requires --render-only and exactly one coin")
+            return 1
+        try:
+            return repair_history(repo, sys.argv[at + 1])
+        except (ValueError, OSError, RuntimeError) as exc:
+            print(f"history repair refused: {exc}")
+            return 1
     amap = load_map()
     rows = snapshot_rows(amap)
     if len(rows) < 100:
@@ -292,23 +406,25 @@ def main():
     hdir = os.path.join(repo, "data", "hist")
     os.makedirs(hdir, exist_ok=True)
     n_hist = 0
+    failed = []
     for r in rows:
         try:
             h = history(r["coin"])
         except Exception as e:  # noqa: BLE001
             print("hist fail", r["coin"], e)
+            failed.append(r)
             h = []
-        if len(h) >= 24:
-            n_hist += 1
-            fn = r["coin"].replace(":", "_") + ".json"
-            with open(os.path.join(hdir, fn), "w", encoding="utf-8") as f:
-                json.dump([[t, round(v, 10)] for t, v in h], f,
-                          separators=(",", ":"))
-            r.update(averages(h, now_s))
-            r["hist"] = 1
-        else:
-            r.update({k: None for k in ("a1d", "a3d", "a7d", "a2w", "a1m", "a3m")})
-            r["hist"] = 0
+        n_hist += store_row_history(r, h, hdir, now_s)
+        time.sleep(0.12)
+    # One deferred retry lets a transient API outage recover after other coins.
+    # Legitimately short histories are not failures and are never retried here.
+    for r in failed:
+        try:
+            h = history(r["coin"])
+        except Exception as e:  # noqa: BLE001
+            print("hist retry fail", r["coin"], e)
+            continue
+        n_hist += store_row_history(r, h, hdir, now_s)
         time.sleep(0.12)
     caps = market_caps(rows, amap, repo, skip=skip_caps)
     for r in rows:
@@ -316,9 +432,8 @@ def main():
     cats = [c for c in CATEGORY_ORDER if any(r["cat"] == c for r in rows)]
     data = {"ts": now_s, "rows": rows, "categories": cats,
             "hist_days": HIST_DAYS}
-    tpl = open(os.path.join(HERE, "terminal_template.html"),
-               encoding="utf-8").read()
-    lw = open(os.path.join(HERE, "lw.js"), encoding="utf-8").read()
+    tpl = Path(HERE, "terminal_template.html").read_text(encoding="utf-8")
+    lw = Path(HERE, "lw.js").read_text(encoding="utf-8")
     html = (tpl.replace("__LW_JS__", lw)
                .replace("__DATA__", json.dumps(data, separators=(",", ":"))))
     with open(os.path.join(repo, "index.html"), "w", encoding="utf-8") as f:
